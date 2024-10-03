@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <title>Calculateur D'âge</title>
+
+  <style>
+    body{
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    /* Splash Screen (Page Initiate) */
+    #splash-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: #012239;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      font-size: 40px;
+      font-weight: bold;
+    }
+
+    /* Style principal après splash */
+    body.main-page {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    main{
+      background-color: white;
+      padding: 50px;
+      border-radius: 15px;
+      border-bottom-right-radius: 150px;
+    }
+
+    .box{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .btn{
+      display: flex;
+    } 
+
+    #barre{
+      width: 540px;
+      margin-top: 60px;
+      height: 0px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    img{
+      background-color: rgb(1, 34, 57);
+      border: none;
+      padding: 25px 25px;
+      cursor: pointer;
+      border-radius: 50px;
+      margin-top: 10px;
+      width: 45px;
+      position: relative;
+      left: 5px;
+      top: 5px;
+    }
+
+    img:hover {
+      background-color: #483d8b;
+      transform: translateY(-5px);
+      transition: ease 0.5s ;
+    }
+
+    label{
+      color: grey;
+      font-size: 20px;
+      padding: 10px;
+    }
+
+    input[type=number]{
+      width: 150px;
+      padding: 18px;
+      margin: 10px;
+      border-radius: 5px;
+      font-size: 25px;
+      font-weight: 900;
+      -moz-appearance: textfield;
+    }
+
+    input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button{
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input::placeholder{
+      font-weight: 900;
+      font-size: 20px;
+      color: #838181;
+    } 
+
+    .resultat p{
+      font-size: 70px;
+      margin: 10px 0;
+      font-weight: 900;
+      font-family: 'poppins';
+      font-style: oblique;
+      color: rgb(1, 34, 57);
+      margin-left: 35px;
+    }
+
+    .resultat span{
+      color: rgb(206, 23, 23);
+    }
+
+    .nvl-fonction{
+      text-align: center;
+    }
+
+    .nvl-fonction i{
+      font-size: 40px;
+      color: #1a1919;
+      margin-bottom: 5px;
+    }
+
+    .nvl-fonction h4{
+      color: #838181;
+      font-family: 'arial';
+    }
+
+    .attribution a { 
+      color: hsl(228, 45%, 44%);
+      font-family: 'poppins';
+    }
+  </style>
+</head>
+<body>
+  <!-- Splash Screen -->
+  <div id="splash-screen">Bienvenue</div>
+
+  <!-- Page principale -->
+  <main style="display:none">
+    <h1>Mon suivi d'âge</h1>
+    <hr> <br>
+    <div class="box">
+      <div class="jour">
+        <label for="jour">Jour</label> <br>
+        <input type="number" id="day" placeholder="JJ" min="1" max="31">
+      </div>
+      <div class="mois">
+        <label for="mois">Mois</label><br>
+        <input type="number" id="month" placeholder="MM" max="12" min="1">
+      </div>
+      <div class="annee">
+        <label for="année">Année</label><br>
+        <input type="number" id="year" placeholder="AAAA" min="1900">
+      </div>
+    </div>
+    <div class="btn">
+      <p id="barre"></p><img src="assets/images/icon-arrow.svg" id="calculate-btn">
+    </div>
+    <div class="resultat">
+      <p><span id="years">--</span> Ans</p>
+      <p><span id="months">--</span> Mois</p>
+      <p><span id="days">--</span> Jours</p>
+    </div>
+    <div>
+      <h1>Mon prochain anniversaire</h1>
+      <hr> <br>
+      <div class="nvl-fonction">
+        <i class="fas fa-spinner fa-spin"></i>
+        <h4>Fonctionnalité bientôt disponible !</h4>
+      </div>
+    </div>
+  </main>
+
+  <div class="attribution">
+    <p>&copy; 2024 Tous droits réservés | <a href="">|S|☺|M|</a></p>
+  </div>
+
+  <!-- Script pour le calcul de l'âge et la gestion du splash screen -->
+  <script>
+    // Gestion du splash screen
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        document.getElementById('splash-screen').style.display = 'none';
+        document.querySelector('main').style.display = 'block';
+      }, 3000); // 3 secondes
+    });
+
+    // Quand l'utilisateur clique sur le bouton de calcul
+    document.getElementById("calculate-btn").addEventListener("click", function() {
+      const day = parseInt(document.getElementById("day").value);
+      const month = parseInt(document.getElementById("month").value);
+      const year = parseInt(document.getElementById("year").value);
+
+      if (!day || !month || !year || day > 31 || month > 12 || year > new Date().getFullYear()) {
+        alert("Veuillez entrer une date valide !");
+        return;
+      }
+
+      const selectedDate = new Date(year, month - 1, day);
+      const currentDate = new Date();
+
+      let years = currentDate.getFullYear() - selectedDate.getFullYear();
+      let months = currentDate.getMonth() - selectedDate.getMonth();
+      let days = currentDate.getDate() - selectedDate.getDate();
+
+      if (days < 0) {
+        months -= 1;
+        days += new Date(currentDate.getFullYear(), currentDate.getMonth(), 0).getDate();
+      }
+
+      if (months < 0) {
+        years -= 1;
+        months += 12;
+      }
+
+      document.getElementById("years").textContent = years;
+      document.getElementById("months").textContent = months;
+      document.getElementById("days").textContent = days;
+    });
+  </script>
+</body>
+</html>
